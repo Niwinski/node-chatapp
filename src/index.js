@@ -28,16 +28,20 @@ io.on("connection", (socket) => {
     console.log("new connection");
 
     socket.on("newMsg", (msg, cb) => {
-        const room = getUser(socket.id).room;
+        try {
+            const room = getUser(socket.id).room;
+            io.to(room).emit(
+                "msg",
+                generateMessage(getUser(socket.id).username, msg)
+            );
+        } catch {
+            // ignore bad users.
+        }
         // const badwords = new Filter();
         // if (badwords.isProfane(msg)) {
         //     return cb("no profanity");
         // }
         // console.log("got ", msg);
-        io.to(room).emit(
-            "msg",
-            generateMessage(getUser(socket.id).username, msg)
-        );
         cb();
     });
 

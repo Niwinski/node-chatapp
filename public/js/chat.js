@@ -114,20 +114,25 @@ $btnLoc.addEventListener("click", () => {
     }
     $btnLoc.setAttribute("disabled", "foo");
 
-    navigator.geolocation.getCurrentPosition((pos) => {
-        socket.emit(
-            "myLoc",
-            {
-                lat: pos.coords.latitude,
-                long: pos.coords.longitude,
-            },
-            (err) => {
-                $btnLoc.removeAttribute("disabled");
-                console.log("location shared");
-            }
-        );
-        console.log(pos);
-    });
+    navigator.geolocation.getCurrentPosition(
+        (pos) => {
+            socket.emit(
+                "myLoc",
+                {
+                    lat: pos.coords.latitude,
+                    long: pos.coords.longitude,
+                },
+                (err) => {
+                    $btnLoc.removeAttribute("disabled");
+                    console.log("location shared" + err);
+                }
+            );
+        },
+        (err) => {
+            // there was an error
+            console.log("got" + err.toString());
+        }
+    );
 });
 
 socket.emit("join", { username, room }, (error) => {
