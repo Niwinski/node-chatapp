@@ -29,11 +29,11 @@ io.on("connection", (socket) => {
 
     socket.on("newMsg", (msg, cb) => {
         const room = getUser(socket.id).room;
-        const badwords = new Filter();
-        if (badwords.isProfane(msg)) {
-            return cb("no profanity");
-        }
-        console.log("got ", msg);
+        // const badwords = new Filter();
+        // if (badwords.isProfane(msg)) {
+        //     return cb("no profanity");
+        // }
+        // console.log("got ", msg);
         io.to(room).emit(
             "msg",
             generateMessage(getUser(socket.id).username, msg)
@@ -63,13 +63,13 @@ io.on("connection", (socket) => {
             return cb(error);
         }
         socket.join(user.room);
-        socket.emit("msg", generateMessage("welcome to the game"));
+        socket.emit("msg", generateMessage("Admin", "welcome to the game"));
         socket.broadcast
             .to(user.room)
             .emit(
                 "msg",
                 generateMessage(
-                    "admin",
+                    "Admin",
                     `${user.username} has entered the arena`
                 )
             );

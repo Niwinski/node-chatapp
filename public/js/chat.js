@@ -15,6 +15,7 @@ socket.on("welcome", (msg) => {
 
 const myForm = document.querySelector("form");
 const $btnLoc = document.querySelector("#btnLoc");
+const $btnInsult = document.querySelector("#btnInsult");
 
 const $form = document.querySelector("form");
 const $input = $form.querySelector("input");
@@ -103,11 +104,15 @@ myForm.addEventListener("submit", (e) => {
     });
 });
 
-btnLoc.addEventListener("click", () => {
+$btnInsult.addEventListener("click", () => {
+    socket.emit("newMsg", getInsult(), () => {});
+});
+
+$btnLoc.addEventListener("click", () => {
     if (!navigator.geolocation) {
         return alert("geolocation is not supported by your broser");
     }
-    btnLoc.setAttribute("disabled", "foo");
+    $btnLoc.setAttribute("disabled", "foo");
 
     navigator.geolocation.getCurrentPosition((pos) => {
         socket.emit(
