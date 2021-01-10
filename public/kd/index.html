@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Kingdomino</title>
+    </head>
+    <body>
+        <div class="game">
+            <div id="board" class="board"></div>
+            <div class="user-input">
+
+                <div id="drawpile" class="drawpile">
+                    <div id="next-tile" class="next-tile">
+                        <div id="next-tile-1" class="next-tile-inner"></div>
+                        <div id="next-tile-2" class="next-tile-inner"></div>
+   
+                    </div>
+                    <p>Click here to rotate</p>
+                </div>
+                <div class="buttons-container">
+                    <button id="undo" class="btn">Undo</button>
+                    <button id="restart" class="btn">Restart</button>
+                </div>
+        <div id="notification-container" class="notification-container">Your Message Here</div>
+
+        </div>
+        <div class="score-container">
+            <div class="score-inner">
+                <div class="terrain"><div class="score"></div></div>
+                <div class="terrain"><div class="score"></div></div>
+                <div class="terrain"><div class="score"></div></div>
+                <div class="terrain"><div class="score"></div></div>
+                <div class="terrain"><div class="score"></div></div>
+                <div class="terrain"><div class="score"></div></div>
+    
+                <div id="score-total" class="score-total">5</div>
+            </div>
+        </div>
+        <script src="./script.js"></script>
+    </body>
+</html>
