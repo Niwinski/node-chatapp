@@ -189,6 +189,9 @@ function doScore() {
 let nextPiece = 0;
 
 function doNextPiece() {
+    curRot = 0;
+    nextTileEl.style.transform = `rotate(${curRot}deg)`;
+
     nextPiece++;
     nextTileLeft.style.backgroundImage = `url("./art/tile_${allPieces[nextPiece].id}_0.jpg")`;
     nextTileRight.style.backgroundImage = `url("./art/tile_${allPieces[nextPiece].id}_1.jpg")`;
@@ -196,24 +199,87 @@ function doNextPiece() {
     doScore();
 }
 
-function addPieceToBoard(tile1) {
-    const rot = curRot % 360; // noralize the rotation.
-    const vert = rot == 90 || rot == 270;
-    const tile2 = vert ? tile1 + 5 : tile1 + 1;
-    const reverse = rot > 90;
+function getPossiblePlacements(tile, vert) {
+    const up = tile - 5;
+    const left = tile - 1;
+    const right = tile + 1;
+    const down = tile + 5;
+    let ret_h = [];
+    let ret_v = [];
 
-    // do we have space
-    if (isUsed(tile1) || isUsed(tile2)) {
-        console.log("no space!");
-        showNotification("No Space for this tile!!!");
+    // up
+    if (right % 5 && !isUsed(right)) {
+        ret_h.push([tile, right]);
+    }
+    if (tile % 5 && !isUsed(left)) {
+        ret_h.push([left, tile]);
+    }
+    if (down <= 24 && !isUsed(down)) {
+        ret_v.push([tile, down]);
+    }
+    if (up >= 0 && !isUsed(up)) {
+        ret_v.push([up, tile]);
+    }
+
+    // prioritize vertical or horizonal placement.
+    if (vert) {
+        return ret_v.concat(ret_h);
+    }
+    return ret_h.concat(ret_v);
+}
+
+function addPieceToBoard(tile1) {
+    if (isUsed(tile1)) {
+        showNotification("Space used!!!");
         return;
     }
 
+    const rot = curRot % 360; // noralize the rotation.
+    const vert = rot == 90 || rot == 270;
+    let tile2 = vert ? tile1 + 5 : tile1 + 1;
+    const reverse = rot > 90;
+
+    const moves = getPossiblePlacements(tile1, vert);
+    console.log(moves);
+    if (moves.length < 1) {
+        showNotification("No Space left!!!");
+        return;
+    }
+    //   // do we have space
+    //   if (tile1 > 24 || tile2 > 24) {
+    //     console.log("no space!");
+    //     showNotification("No Space for this tile!!!");
+    //     return;
+    //   }
+    //   if (isUsed(tile1) || isUsed(tile2)) {
+    //     console.log("no space!");
+    //     showNotification("No Space for this tile!!!");
+    //     return;
+    //   }
+    //   if (tile2 % 5 == 0 && tile2 - tile1 == 1) {
+    //     // horizontal tile on the right edge
+    //     showNotification("Won't fit!!!");
+    //     return;
+    //   }
+    tile1 = moves[0][0];
+    tile2 = moves[0][1];
     const index1 = reverse ? 1 : 0;
     const index2 = reverse ? 0 : 1;
     const piece = allPieces[nextPiece];
-    tiles[tile1].setInfo(piece.id, index1, piece.terrain[index1], piece.crowns[index1], rot);
-    tiles[tile2].setInfo(piece.id, index2, piece.terrain[index2], piece.crowns[index2], rot);
+    tiles[tile1].setInfo(
+        piece.id,
+        index1,
+        piece.terrain[index1],
+        piece.crowns[index1],
+        rot
+    );
+    tiles[tile2].setInfo(
+        piece.id,
+        index2,
+        piece.terrain[index2],
+        piece.crowns[index2],
+        rot
+    );
 
     doNextPiece();
 }
