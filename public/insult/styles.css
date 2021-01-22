@@ -1,13 +1,16 @@
 /* General Styles */
 
-* {
+body {
+    color: #333333;
+    font-family: Helvetica, Arial, sans-serif;
+    width: 100vw;
+    height: 100vh;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 button {
-    width: 80vw;
-    height: 60px;
+    width: 100vw;
+    height: 16vh;
     font-size: 24px;
     background: darkred;
     color: whitesmoke;
@@ -17,15 +20,12 @@ button {
     font-weight: 300;
     display: flex;
     padding: 15px;
-}
-
-body {
-    color: #333333;
-    font-family: Helvetica, Arial, sans-serif;
+    bottom: 30px;
+    position: absolute;
 }
 
 .insult {
-    height: 200px;
+    height: 80vh;
     width: 81vw;
     text-align: center;
     justify-content: center;
@@ -43,7 +43,9 @@ body {
 }
 
 .eggs img {
-    margin: 30px 2px;
+    position: absolute;
+    bottom: 26vh;
+    right: 20vh;
     width: 140px;
     height: 140px;
     border-radius: 15px;

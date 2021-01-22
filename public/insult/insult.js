@@ -15,7 +15,7 @@ function getRandomInt(max) {
 
 btnInsult.addEventListener("click", () => {
     console.log("hit me!");
-    messages.innerHTML = getInsult();
+    messages.innerHTML = "<p>" + getInsult() + "</p>";
 });
 
 const getInsult = () => {
