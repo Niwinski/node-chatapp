@@ -283,6 +283,30 @@ function addPieceToBoard(tile1) {
 
     doNextPiece();
 }
+function dragDrop() {
+    addPieceToBoard(+this.id);
+}
+
+function dragOver(e) {
+    e.preventDefault();
+}
+
+function dragStart(e) {
+    // document.getElementById("drag-with-create-add").addEventListener("dragstart", function(e) {
+    var crt = this.cloneNode(true);
+
+    crt.style.position = "absolute";
+    crt.style.top = "0px";
+    crt.style.left = "-100px";
+
+    // var inner = crt.getElementsByClassName("inner")[0];
+    // inner.style.backgroundColor = "orange";
+    // inner.style.transform = `rotate(${curRot})`;
+    crt.style.transform = `rotate(${curRot})`;
+
+    document.body.appendChild(crt);
+    e.dataTransfer.setDragImage(crt, 20, 20);
+}
 
 // make the board
 function initBoard() {
@@ -293,6 +317,12 @@ function initBoard() {
         t.addEventListener("click", (e) => {
             addPieceToBoard(+e.target.id);
         });
+
+        t.addEventListener("dragover", dragOver);
+        t.addEventListener("drop", dragDrop);
+        // e.addEventListener("dragenter", dragEnter);
+        // e.addEventListener("dragleave", dragLeave);
+
         tiles.push(new Tile(t, i));
         board.appendChild(t);
     }
@@ -300,6 +330,50 @@ function initBoard() {
     allScoresEl.forEach((e, i) => {
         e.style.backgroundImage = `url("./art/tile_${scoreBg[i][0]}_${scoreBg[i][1]}.jpg")`;
     });
+
+    // nextTileEl.addEventListener("dragstart", dragStart, false);
+    nextTileEl.addEventListener("zdragstart", function (e) {
+        var crt = this.cloneNode(true);
+
+        crt.style.position = "absolute";
+        crt.style.top = "0px";
+        crt.style.left = "-100px";
+
+        // var inner = crt.getElementsByClassName("inner")[0];
+        // inner.style.backgroundColor = "orange";
+        // inner.style.transform = `rotate(${curRot})`;
+        // crt.style.transform = `rotate(${curRot})`;
+
+        document.body.appendChild(crt);
+        e.dataTransfer.setDragImage(crt, 20, 20);
+    });
+    // const ii = document.getElementById("ii");
+    // ii.src = "./art/tile_0_0.jpg";
+    // const ij = document.getElementById("ij");
+    // ij.src = "./art/tile_0_0.jpg";
+    document.getElementById("next-tile").addEventListener(
+        "dragstart",
+        function (e) {
+            var crt = this.cloneNode(true);
+            crt.style.position = "absolute";
+            crt.style.top = "0px";
+            crt.style.left = "0px";
+            // crt.style.backgroundColor = "red";
+            // crt.style.backgroundImage = `url("./art/tile_0_0.jpg")`;
+            // const inn = crt.getElementsByClassName("ii")[0];
+
+            // // var inner = crt.getElementsByClassName("ii")[0];
+
+            crt.style.transform = `rotate(${curRot}deg)`;
+            const img = new Image();
+            img.src = "./art/finger.png";
+            // document.body.appendChild(crt);
+            // document.body.appendChild(crt);
+            e.dataTransfer.setDragImage(img, 10, 10);
+            //e.dataTransfer.setDragImage(img, 10, 10);
+        },
+        false
+    );
 }
 function shuffleDeck() {
     for (let i = 0; i < 300; i++) {
