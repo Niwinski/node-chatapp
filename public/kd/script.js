@@ -339,18 +339,10 @@ function initBoard() {
         crt.style.top = "0px";
         crt.style.left = "-100px";
 
-        // var inner = crt.getElementsByClassName("inner")[0];
-        // inner.style.backgroundColor = "orange";
-        // inner.style.transform = `rotate(${curRot})`;
-        // crt.style.transform = `rotate(${curRot})`;
-
         document.body.appendChild(crt);
         e.dataTransfer.setDragImage(crt, 20, 20);
     });
-    // const ii = document.getElementById("ii");
-    // ii.src = "./art/tile_0_0.jpg";
-    // const ij = document.getElementById("ij");
-    // ij.src = "./art/tile_0_0.jpg";
+
     document.getElementById("next-tile").addEventListener(
         "dragstart",
         function (e) {
@@ -358,19 +350,12 @@ function initBoard() {
             crt.style.position = "absolute";
             crt.style.top = "0px";
             crt.style.left = "0px";
-            // crt.style.backgroundColor = "red";
-            // crt.style.backgroundImage = `url("./art/tile_0_0.jpg")`;
-            // const inn = crt.getElementsByClassName("ii")[0];
 
-            // // var inner = crt.getElementsByClassName("ii")[0];
 
             crt.style.transform = `rotate(${curRot}deg)`;
             const img = new Image();
             img.src = "./art/finger.png";
-            // document.body.appendChild(crt);
-            // document.body.appendChild(crt);
             e.dataTransfer.setDragImage(img, 10, 10);
-            //e.dataTransfer.setDragImage(img, 10, 10);
         },
         false
     );
@@ -401,7 +386,6 @@ restartLevel();
 
 drawpile.addEventListener("click", () => {
     curRot = curRot + 90; // don't mod or the transform will be funny
-    //    console.log(`setting rot to ${curRot}`);
 
     nextTileEl.style.transform = `rotate(${curRot}deg)`;
 });
