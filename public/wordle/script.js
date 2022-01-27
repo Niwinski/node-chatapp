@@ -20,6 +20,8 @@ myInput.value = Number(todaysPuzzle);
 myForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const num = Number(e.target.elements.num.value);
-    answer.innerHTML = "Try: " + La[num];
+    var w = La[num].toUpperCase();
 
+    answer.innerHTML = `<table><tr><td>${w[0]}</td><td>${w[1]}</td><td>${w[2]}</td><td>${w[3]}</td><td>${w[4]}</td></tr></table>`;
+    
 });
