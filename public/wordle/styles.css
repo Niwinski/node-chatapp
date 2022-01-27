@@ -1,0 +1,63 @@
+#app {
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    position: relative;
+}
+#title {
+    background-color: rgb(199, 178, 178);
+
+    /* background-color: lightblue; */
+    margin: 50px auto;
+    border: 2px solid black;
+    border-radius: 20px;
+    font-size: 24px;
+    padding: 20px;
+    display: flex;
+}
+
+.marker {
+    position: absolute;
+    width: 60px;
+    left: 172px;
+    top: -20px;
+    z-index: 2;
+}
+
+.wheel {
+    width: 100%;
+    height: 100%;
+}
+
+.button {
+    cursor: pointer;
+    background-color: rgb(201, 97, 37);
+
+    /* background-color: lightblue; */
+    margin: 50px auto;
+    border: 2px solid black;
+    border-radius: 20px;
+    font-size: 24px;
+    padding: 20px;
+    display: flex;
+}
+
+.button:hover {
+    opacity: 0.8;
+}
+
+.blur {
+    animation: blur 10s;
+}
+
+@keyframes blur {
+    0% {
+        filter: blur(1.5px);
+    }
+    80% {
+        filter: blur(1.5px);
+    }
+    100% {
+        filter: blur(0px);
+    }
+}
