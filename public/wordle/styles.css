@@ -13,6 +13,7 @@ body {
     --blue: #85c0f9;
     font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
     font-size: 32px;
+    background-color: black;
   }
 
 tr ,td {
